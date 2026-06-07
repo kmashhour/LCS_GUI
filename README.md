@@ -16,8 +16,11 @@ Gelaagde architectuur: Presentation → Services → Repository → Domain.
 
 Projectstructuur
 /modellen        # Domeinobjecten (Leerling, Docent, Cijfer, Onderdeel, Periode, Studiejaar)
- /services       # Logica (CijferManager, PeriodeService)
+
+/services        # Logica (CijferManager, PeriodeService)
+
  /repositories   # Databasecommunicatie (SQLite)
+ 
  main.py         # Startpunt van de applicatie
  requirements.txt
  README.md
