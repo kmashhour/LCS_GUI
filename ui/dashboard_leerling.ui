@@ -1,0 +1,917 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>dashboard_leerling</class>
+ <widget class="QWidget" name="dashboard_leerling">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>650</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>900</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>LCS - LeerlingCijferSysteem</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QFrame" name="zijbalk">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>220</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>220</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+QFrame#zijbalk {
+    background-color: #111827;
+}
+QLabel {
+    color: white;
+}
+QPushButton {
+    background-color: transparent;
+    color: white;
+    text-align: left;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+}
+QPushButton:hover {
+    background-color: #1f2937;
+}
+      </string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+     <layout class="QVBoxLayout" name="layout_zijbalk">
+      <property name="spacing">
+       <number>10</number>
+      </property>
+      <property name="leftMargin">
+       <number>16</number>
+      </property>
+      <property name="topMargin">
+       <number>22</number>
+      </property>
+      <property name="rightMargin">
+       <number>16</number>
+      </property>
+      <property name="bottomMargin">
+       <number>20</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="lbl_app_titel">
+        <property name="styleSheet">
+         <string notr="true">font-size: 16px; font-weight: bold;</string>
+        </property>
+        <property name="text">
+         <string>LeerlingCijferSysteem</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lbl_gebruiker_rol">
+        <property name="styleSheet">
+         <string notr="true">color: #d1d5db; font-size: 12px;</string>
+        </property>
+        <property name="text">
+         <string>Leerling</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_dashboard">
+        <property name="text">
+         <string>Dashboard</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_mijn_cijfers">
+        <property name="text">
+         <string>Mijn cijfers</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_account">
+        <property name="text">
+         <string>Account</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="spacer_zijbalk_onder">
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>200</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_uitloggen">
+        <property name="text">
+         <string>Uitloggen</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QFrame" name="inhoudsgebied">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>1</horstretch>
+       <verstretch>1</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+QFrame#inhoudsgebied {
+    background-color: #f3f4f6;
+}
+QLabel {
+    color: #111827;
+}
+QFrame#kaart_po_gemiddelde,
+QFrame#kaart_toets,
+QFrame#kaart_eindcijfer,
+QFrame#kaart_po_aantal,
+QFrame#paneel_dashboard_cijfers,
+QFrame#paneel_mijncijfers_filters,
+QFrame#paneel_mijncijfers_cijfers,
+QFrame#paneel_account {
+    background-color: white;
+    border-radius: 12px;
+}
+QTableWidget {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    gridline-color: #e5e7eb;
+}
+QHeaderView::section {
+    background-color: #f9fafb;
+    color: #374151;
+    padding: 8px;
+    border: none;
+    border-bottom: 1px solid #e5e7eb;
+}
+      </string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+     <layout class="QVBoxLayout" name="layout_inhoud">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QStackedWidget" name="stacked_paginas">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
+        <widget class="QWidget" name="pagina_dashboard">
+         <layout class="QVBoxLayout" name="layout_dashboard">
+          <property name="spacing">
+           <number>18</number>
+          </property>
+          <property name="leftMargin">
+           <number>30</number>
+          </property>
+          <property name="topMargin">
+           <number>25</number>
+          </property>
+          <property name="rightMargin">
+           <number>30</number>
+          </property>
+          <property name="bottomMargin">
+           <number>25</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lbl_dashboard_titel">
+            <property name="styleSheet">
+             <string notr="true">font-size: 24px; font-weight: bold;</string>
+            </property>
+            <property name="text">
+             <string>Dashboard</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="paneel_dashboard_info">
+            <property name="frameShape">
+             <enum>QFrame::Shape::NoFrame</enum>
+            </property>
+            <layout class="QHBoxLayout" name="layout_dashboard_info">
+             <property name="spacing">
+              <number>20</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="lbl_dashboard_studiejaar">
+               <property name="text">
+                <string>Studiejaar: 2025-2026</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_dashboard_periode">
+               <property name="text">
+                <string>Periode: Laatste bekende</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="spacer_dashboard_info_rechts">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="container_kaarten">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>120</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>200</height>
+             </size>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Shape::NoFrame</enum>
+            </property>
+            <layout class="QHBoxLayout" name="layout_kaarten">
+             <property name="spacing">
+              <number>16</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QFrame" name="kaart_po_gemiddelde">
+               <property name="minimumSize">
+                <size>
+                 <width>300</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <layout class="QVBoxLayout" name="layout_kaart_po">
+                <property name="leftMargin">
+                 <number>22</number>
+                </property>
+                <property name="topMargin">
+                 <number>18</number>
+                </property>
+                <property name="rightMargin">
+                 <number>22</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>18</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="lbl_po_gemiddelde_titel">
+                  <property name="styleSheet">
+                   <string notr="true">color: #6b7280; font-size: 13px;</string>
+                  </property>
+                  <property name="text">
+                   <string>Gemiddelde PO-cijfer</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lbl_po_gemiddelde_waarde">
+                  <property name="styleSheet">
+                   <string notr="true">font-size: 32px; font-weight: bold;</string>
+                  </property>
+                  <property name="text">
+                   <string>7.4</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="kaart_toets">
+               <property name="minimumSize">
+                <size>
+                 <width>180</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <layout class="QVBoxLayout" name="layout_kaart_toets">
+                <property name="leftMargin">
+                 <number>22</number>
+                </property>
+                <property name="topMargin">
+                 <number>18</number>
+                </property>
+                <property name="rightMargin">
+                 <number>22</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>18</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="lbl_toets_titel">
+                  <property name="styleSheet">
+                   <string notr="true">color: #6b7280; font-size: 13px;</string>
+                  </property>
+                  <property name="text">
+                   <string>Toetscijfer</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lbl_toets_waarde">
+                  <property name="styleSheet">
+                   <string notr="true">font-size: 32px; font-weight: bold;</string>
+                  </property>
+                  <property name="text">
+                   <string>7.0</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="kaart_eindcijfer">
+               <property name="minimumSize">
+                <size>
+                 <width>180</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <layout class="QVBoxLayout" name="layout_kaart_eindcijfer">
+                <property name="leftMargin">
+                 <number>22</number>
+                </property>
+                <property name="topMargin">
+                 <number>18</number>
+                </property>
+                <property name="rightMargin">
+                 <number>22</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>18</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="lbl_eindcijfer_titel">
+                  <property name="styleSheet">
+                   <string notr="true">color: #6b7280; font-size: 13px;</string>
+                  </property>
+                  <property name="text">
+                   <string>Eindcijfer Informatica</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lbl_eindcijfer_waarde">
+                  <property name="styleSheet">
+                   <string notr="true">font-size: 32px; font-weight: bold;</string>
+                  </property>
+                  <property name="text">
+                   <string>7.3</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="kaart_po_aantal">
+               <property name="minimumSize">
+                <size>
+                 <width>180</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <layout class="QVBoxLayout" name="layout_kaart_po_aantal">
+                <property name="leftMargin">
+                 <number>22</number>
+                </property>
+                <property name="topMargin">
+                 <number>18</number>
+                </property>
+                <property name="rightMargin">
+                 <number>22</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>18</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="lbl_po_aantal_titel">
+                  <property name="styleSheet">
+                   <string notr="true">color: #6b7280; font-size: 13px;</string>
+                  </property>
+                  <property name="text">
+                   <string>Aantal PO-onderdelen</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lbl_po_aantal_waarde">
+                  <property name="styleSheet">
+                   <string notr="true">font-size: 32px; font-weight: bold;</string>
+                  </property>
+                  <property name="text">
+                   <string>5</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="paneel_dashboard_cijfers">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <layout class="QVBoxLayout" name="layout_paneel_dashboard_cijfers">
+             <property name="spacing">
+              <number>12</number>
+             </property>
+             <property name="leftMargin">
+              <number>22</number>
+             </property>
+             <property name="topMargin">
+              <number>20</number>
+             </property>
+             <property name="rightMargin">
+              <number>22</number>
+             </property>
+             <property name="bottomMargin">
+              <number>20</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="lbl_dashboard_cijfers_titel">
+               <property name="styleSheet">
+                <string notr="true">font-size: 18px; font-weight: bold;</string>
+               </property>
+               <property name="text">
+                <string>Cijfers laatste periode</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTableWidget" name="tabel_dashboard_cijfers">
+               <property name="sizeAdjustPolicy">
+                <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents</enum>
+               </property>
+               <property name="horizontalScrollMode">
+                <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
+               </property>
+               <property name="rowCount">
+                <number>0</number>
+               </property>
+               <property name="columnCount">
+                <number>5</number>
+               </property>
+               <column>
+                <property name="text">
+                 <string>Onderdeel</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Cijfer</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Weging</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Datum</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Docent</string>
+                </property>
+               </column>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="pagina_mijn_cijfers">
+         <layout class="QVBoxLayout" name="layout_mijn_cijfers">
+          <property name="spacing">
+           <number>18</number>
+          </property>
+          <property name="leftMargin">
+           <number>30</number>
+          </property>
+          <property name="topMargin">
+           <number>25</number>
+          </property>
+          <property name="rightMargin">
+           <number>30</number>
+          </property>
+          <property name="bottomMargin">
+           <number>25</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lbl_mijn_cijfers_titel">
+            <property name="styleSheet">
+             <string notr="true">font-size: 24px; font-weight: bold;</string>
+            </property>
+            <property name="text">
+             <string>Mijn cijfers</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="paneel_mijncijfers_filters">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <layout class="QHBoxLayout" name="layout_mijncijfers_filters">
+             <property name="spacing">
+              <number>16</number>
+             </property>
+             <property name="leftMargin">
+              <number>22</number>
+             </property>
+             <property name="topMargin">
+              <number>14</number>
+             </property>
+             <property name="rightMargin">
+              <number>22</number>
+             </property>
+             <property name="bottomMargin">
+              <number>14</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="lbl_mijncijfers_studiejaar">
+               <property name="text">
+                <string>Studiejaar:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="cmb_mijncijfers_studiejaar"/>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_mijncijfers_periode">
+               <property name="text">
+                <string>Periode:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="cmb_mijncijfers_periode"/>
+             </item>
+             <item>
+              <spacer name="spacer_mijncijfers_filters_rechts">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="paneel_mijncijfers_cijfers">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <layout class="QVBoxLayout" name="layout_paneel_mijncijfers_cijfers">
+             <property name="spacing">
+              <number>12</number>
+             </property>
+             <property name="leftMargin">
+              <number>22</number>
+             </property>
+             <property name="topMargin">
+              <number>20</number>
+             </property>
+             <property name="rightMargin">
+              <number>22</number>
+             </property>
+             <property name="bottomMargin">
+              <number>20</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="lbl_mijncijfers_cijfers_titel">
+               <property name="styleSheet">
+                <string notr="true">font-size: 18px; font-weight: bold;</string>
+               </property>
+               <property name="text">
+                <string>Alle cijfers</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_waarschuwing_po">
+               <property name="styleSheet">
+                <string notr="true">color: #b91c1c; font-size: 12px;</string>
+               </property>
+               <property name="text">
+                <string>Waarschuwing: PO-gemiddelde onvoldoende.</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_waarschuwing_toets">
+               <property name="styleSheet">
+                <string notr="true">color: #b91c1c; font-size: 12px;</string>
+               </property>
+               <property name="text">
+                <string>Waarschuwing: Toets nog niet ingevoerd.</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTableWidget" name="tabel_mijn_cijfers">
+               <property name="sizeAdjustPolicy">
+                <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents</enum>
+               </property>
+               <property name="horizontalScrollMode">
+                <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
+               </property>
+               <property name="rowCount">
+                <number>0</number>
+               </property>
+               <property name="columnCount">
+                <number>5</number>
+               </property>
+               <column>
+                <property name="text">
+                 <string>Onderdeel</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Cijfer</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Weging</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Datum</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Docent</string>
+                </property>
+               </column>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="pagina_account">
+         <layout class="QVBoxLayout" name="layout_account">
+          <property name="spacing">
+           <number>18</number>
+          </property>
+          <property name="leftMargin">
+           <number>30</number>
+          </property>
+          <property name="topMargin">
+           <number>25</number>
+          </property>
+          <property name="rightMargin">
+           <number>30</number>
+          </property>
+          <property name="bottomMargin">
+           <number>25</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lbl_account_titel">
+            <property name="styleSheet">
+             <string notr="true">font-size: 24px; font-weight: bold;</string>
+            </property>
+            <property name="text">
+             <string>Account</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="paneel_account">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <layout class="QVBoxLayout" name="layout_paneel_account">
+             <property name="spacing">
+              <number>12</number>
+             </property>
+             <property name="leftMargin">
+              <number>22</number>
+             </property>
+             <property name="topMargin">
+              <number>20</number>
+             </property>
+             <property name="rightMargin">
+              <number>22</number>
+             </property>
+             <property name="bottomMargin">
+              <number>20</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="lbl_account_gebruiker_label">
+               <property name="text">
+                <string>Gebruikersnaam:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_account_gebruiker_waarde">
+               <property name="text">
+                <string>leerling.voorbeeld</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_account_email_label">
+               <property name="text">
+                <string>E-mail:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_account_email_waarde">
+               <property name="text">
+                <string>leerling@test.com</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_account_wachtwoord_titel">
+               <property name="styleSheet">
+                <string notr="true">font-size: 16px; font-weight: bold; margin-top: 10px;</string>
+               </property>
+               <property name="text">
+                <string>Wachtwoord wijzigen</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_account_oud_wachtwoord_label">
+               <property name="text">
+                <string>Oud wachtwoord:</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
