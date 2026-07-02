@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>dashboard_leerling</class>
- <widget class="QWidget" name="dashboard_leerling">
+ <class>dashboard_docent</class>
+ <widget class="QWidget" name="dashboard_docent">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>650</height>
+    <width>1100</width>
+    <height>700</height>
    </rect>
-  </property>
-  <property name="sizePolicy">
-   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
-    <width>900</width>
-    <height>600</height>
+    <width>1000</width>
+    <height>650</height>
    </size>
   </property>
   <property name="windowTitle">
-   <string>LCS - LeerlingCijferSysteem</string>
+   <string>LCS - Docentdashboard</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
@@ -71,9 +65,6 @@ QPushButton:hover {
      <property name="frameShape">
       <enum>QFrame::Shape::StyledPanel</enum>
      </property>
-     <property name="frameShadow">
-      <enum>QFrame::Shadow::Raised</enum>
-     </property>
      <layout class="QVBoxLayout" name="layout_zijbalk">
       <property name="spacing">
        <number>10</number>
@@ -109,7 +100,7 @@ QPushButton:hover {
          <string notr="true">color: #d1d5db; font-size: 12px;</string>
         </property>
         <property name="text">
-         <string>Leerling</string>
+         <string>Docent</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -124,9 +115,16 @@ QPushButton:hover {
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btn_mijn_cijfers">
+       <widget class="QPushButton" name="btn_cijferoverzicht">
         <property name="text">
-         <string>Mijn cijfers</string>
+         <string>Cijferoverzicht</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_cijfer_invoeren">
+        <property name="text">
+         <string>Cijfer invoeren</string>
         </property>
        </widget>
       </item>
@@ -162,12 +160,6 @@ QPushButton:hover {
    </item>
    <item row="0" column="1">
     <widget class="QFrame" name="inhoudsgebied">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-       <horstretch>1</horstretch>
-       <verstretch>1</verstretch>
-      </sizepolicy>
-     </property>
      <property name="styleSheet">
       <string notr="true">
 QFrame#inhoudsgebied {
@@ -176,13 +168,18 @@ QFrame#inhoudsgebied {
 QLabel {
     color: #111827;
 }
-QFrame#kaart_po_gemiddelde,
-QFrame#kaart_toets,
-QFrame#kaart_eindcijfer,
-QFrame#kaart_po_aantal,
+QFrame#kaart_klas_gemiddelde,
+QFrame#kaart_hoogste_eindcijfer,
+QFrame#kaart_laagste_eindcijfer,
+QFrame#kaart_aantal_leerlingen,
+QFrame#kaart_leerling_gemiddelde,
+QFrame#kaart_leerling_aantal_cijfers,
+QFrame#kaart_leerling_laagste,
+QFrame#kaart_leerling_hoogste,
 QFrame#paneel_dashboard_cijfers,
-QFrame#paneel_mijncijfers_filters,
-QFrame#paneel_mijncijfers_cijfers,
+QFrame#paneel_overzicht_filters,
+QFrame#paneel_overzicht_cijfers,
+QFrame#paneel_invoer,
 QFrame#paneel_account {
     background-color: white;
     border-radius: 12px;
@@ -200,13 +197,31 @@ QHeaderView::section {
     border: none;
     border-bottom: 1px solid #e5e7eb;
 }
+QLineEdit,
+QComboBox,
+QDoubleSpinBox,
+QDateEdit {
+    background-color: white;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 7px;
+}
+QPushButton#btn_cijfer_opslaan,
+QPushButton#btn_wachtwoord_wijzigen {
+    background-color: #2563eb;
+    color: white;
+    padding: 9px;
+    border: none;
+    border-radius: 6px;
+}
+QPushButton#btn_cijfer_opslaan:hover,
+QPushButton#btn_wachtwoord_wijzigen:hover {
+    background-color: #1d4ed8;
+}
       </string>
      </property>
      <property name="frameShape">
       <enum>QFrame::Shape::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Shadow::Raised</enum>
      </property>
      <layout class="QVBoxLayout" name="layout_inhoud">
       <property name="spacing">
@@ -226,14 +241,8 @@ QHeaderView::section {
       </property>
       <item>
        <widget class="QStackedWidget" name="stacked_paginas">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="pagina_dashboard">
          <layout class="QVBoxLayout" name="layout_dashboard">
@@ -258,7 +267,7 @@ QHeaderView::section {
              <string notr="true">font-size: 24px; font-weight: bold;</string>
             </property>
             <property name="text">
-             <string>Dashboard</string>
+             <string>Dashboard docent</string>
             </property>
            </widget>
           </item>
@@ -294,6 +303,13 @@ QHeaderView::section {
               <widget class="QLabel" name="lbl_dashboard_periode">
                <property name="text">
                 <string>Periode: Laatste bekende</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_dashboard_klas">
+               <property name="text">
+                <string>Klas: Laatste klas</string>
                </property>
               </widget>
              </item>
@@ -347,17 +363,17 @@ QHeaderView::section {
               <number>0</number>
              </property>
              <item>
-              <widget class="QFrame" name="kaart_po_gemiddelde">
+              <widget class="QFrame" name="kaart_klas_gemiddelde">
                <property name="minimumSize">
                 <size>
-                 <width>300</width>
+                 <width>190</width>
                  <height>0</height>
                 </size>
                </property>
                <property name="frameShape">
                 <enum>QFrame::Shape::StyledPanel</enum>
                </property>
-               <layout class="QVBoxLayout" name="layout_kaart_po">
+               <layout class="QVBoxLayout" name="layout_kaart_klas_gemiddelde">
                 <property name="leftMargin">
                  <number>22</number>
                 </property>
@@ -371,22 +387,22 @@ QHeaderView::section {
                  <number>18</number>
                 </property>
                 <item>
-                 <widget class="QLabel" name="lbl_po_gemiddelde_titel">
+                 <widget class="QLabel" name="lbl_klas_gemiddelde_titel">
                   <property name="styleSheet">
                    <string notr="true">color: #6b7280; font-size: 13px;</string>
                   </property>
                   <property name="text">
-                   <string>Gemiddelde PO-cijfer</string>
+                   <string>Gemiddelde klas</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="lbl_po_gemiddelde_waarde">
+                 <widget class="QLabel" name="lbl_klas_gemiddelde_waarde">
                   <property name="styleSheet">
                    <string notr="true">font-size: 32px; font-weight: bold;</string>
                   </property>
                   <property name="text">
-                   <string>7.4</string>
+                   <string>-</string>
                   </property>
                  </widget>
                 </item>
@@ -394,17 +410,17 @@ QHeaderView::section {
               </widget>
              </item>
              <item>
-              <widget class="QFrame" name="kaart_toets">
+              <widget class="QFrame" name="kaart_hoogste_eindcijfer">
                <property name="minimumSize">
                 <size>
-                 <width>180</width>
+                 <width>190</width>
                  <height>0</height>
                 </size>
                </property>
                <property name="frameShape">
                 <enum>QFrame::Shape::StyledPanel</enum>
                </property>
-               <layout class="QVBoxLayout" name="layout_kaart_toets">
+               <layout class="QVBoxLayout" name="layout_kaart_hoogste">
                 <property name="leftMargin">
                  <number>22</number>
                 </property>
@@ -418,22 +434,22 @@ QHeaderView::section {
                  <number>18</number>
                 </property>
                 <item>
-                 <widget class="QLabel" name="lbl_toets_titel">
+                 <widget class="QLabel" name="lbl_hoogste_eindcijfer_titel">
                   <property name="styleSheet">
                    <string notr="true">color: #6b7280; font-size: 13px;</string>
                   </property>
                   <property name="text">
-                   <string>Toetscijfer</string>
+                   <string>Hoogste eindcijfer</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="lbl_toets_waarde">
+                 <widget class="QLabel" name="lbl_hoogste_eindcijfer_waarde">
                   <property name="styleSheet">
                    <string notr="true">font-size: 32px; font-weight: bold;</string>
                   </property>
                   <property name="text">
-                   <string>7.0</string>
+                   <string>-</string>
                   </property>
                  </widget>
                 </item>
@@ -441,17 +457,17 @@ QHeaderView::section {
               </widget>
              </item>
              <item>
-              <widget class="QFrame" name="kaart_eindcijfer">
+              <widget class="QFrame" name="kaart_laagste_eindcijfer">
                <property name="minimumSize">
                 <size>
-                 <width>180</width>
+                 <width>190</width>
                  <height>0</height>
                 </size>
                </property>
                <property name="frameShape">
                 <enum>QFrame::Shape::StyledPanel</enum>
                </property>
-               <layout class="QVBoxLayout" name="layout_kaart_eindcijfer">
+               <layout class="QVBoxLayout" name="layout_kaart_laagste">
                 <property name="leftMargin">
                  <number>22</number>
                 </property>
@@ -465,22 +481,22 @@ QHeaderView::section {
                  <number>18</number>
                 </property>
                 <item>
-                 <widget class="QLabel" name="lbl_eindcijfer_titel">
+                 <widget class="QLabel" name="lbl_laagste_eindcijfer_titel">
                   <property name="styleSheet">
                    <string notr="true">color: #6b7280; font-size: 13px;</string>
                   </property>
                   <property name="text">
-                   <string>Eindcijfer Informatica</string>
+                   <string>Laagste eindcijfer</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="lbl_eindcijfer_waarde">
+                 <widget class="QLabel" name="lbl_laagste_eindcijfer_waarde">
                   <property name="styleSheet">
                    <string notr="true">font-size: 32px; font-weight: bold;</string>
                   </property>
                   <property name="text">
-                   <string>7.3</string>
+                   <string>-</string>
                   </property>
                  </widget>
                 </item>
@@ -488,17 +504,17 @@ QHeaderView::section {
               </widget>
              </item>
              <item>
-              <widget class="QFrame" name="kaart_po_aantal">
+              <widget class="QFrame" name="kaart_aantal_leerlingen">
                <property name="minimumSize">
                 <size>
-                 <width>180</width>
+                 <width>190</width>
                  <height>0</height>
                 </size>
                </property>
                <property name="frameShape">
                 <enum>QFrame::Shape::StyledPanel</enum>
                </property>
-               <layout class="QVBoxLayout" name="layout_kaart_po_aantal">
+               <layout class="QVBoxLayout" name="layout_kaart_aantal_leerlingen">
                 <property name="leftMargin">
                  <number>22</number>
                 </property>
@@ -512,22 +528,22 @@ QHeaderView::section {
                  <number>18</number>
                 </property>
                 <item>
-                 <widget class="QLabel" name="lbl_po_aantal_titel">
+                 <widget class="QLabel" name="lbl_aantal_leerlingen_titel">
                   <property name="styleSheet">
                    <string notr="true">color: #6b7280; font-size: 13px;</string>
                   </property>
                   <property name="text">
-                   <string>Aantal PO-onderdelen</string>
+                   <string>Aantal leerlingen</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="lbl_po_aantal_waarde">
+                 <widget class="QLabel" name="lbl_aantal_leerlingen_waarde">
                   <property name="styleSheet">
                    <string notr="true">font-size: 32px; font-weight: bold;</string>
                   </property>
                   <property name="text">
-                   <string>5</string>
+                   <string>-</string>
                   </property>
                  </widget>
                 </item>
@@ -570,18 +586,12 @@ QHeaderView::section {
                 <string notr="true">font-size: 18px; font-weight: bold;</string>
                </property>
                <property name="text">
-                <string>Cijfers laatste periode</string>
+                <string>Cijferoverzicht laatste klas</string>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QTableWidget" name="tabel_dashboard_cijfers">
-               <property name="sizeAdjustPolicy">
-                <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents</enum>
-               </property>
-               <property name="horizontalScrollMode">
-                <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
-               </property>
                <property name="rowCount">
                 <number>0</number>
                </property>
@@ -590,27 +600,27 @@ QHeaderView::section {
                </property>
                <column>
                 <property name="text">
-                 <string>Onderdeel</string>
+                 <string>Leerling</string>
                 </property>
                </column>
                <column>
                 <property name="text">
-                 <string>Cijfer</string>
+                 <string>PO-gemiddelde</string>
                 </property>
                </column>
                <column>
                 <property name="text">
-                 <string>Weging</string>
+                 <string>Toets</string>
                 </property>
                </column>
                <column>
                 <property name="text">
-                 <string>Datum</string>
+                 <string>Eindcijfer</string>
                 </property>
                </column>
                <column>
                 <property name="text">
-                 <string>Docent</string>
+                 <string>Aantal cijfers</string>
                 </property>
                </column>
               </widget>
@@ -620,8 +630,8 @@ QHeaderView::section {
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="pagina_mijn_cijfers">
-         <layout class="QVBoxLayout" name="layout_mijn_cijfers">
+        <widget class="QWidget" name="pagina_cijferoverzicht">
+         <layout class="QVBoxLayout" name="layout_cijferoverzicht">
           <property name="spacing">
            <number>18</number>
           </property>
@@ -638,21 +648,21 @@ QHeaderView::section {
            <number>25</number>
           </property>
           <item>
-           <widget class="QLabel" name="lbl_mijn_cijfers_titel">
+           <widget class="QLabel" name="lbl_cijferoverzicht_titel">
             <property name="styleSheet">
              <string notr="true">font-size: 24px; font-weight: bold;</string>
             </property>
             <property name="text">
-             <string>Mijn cijfers</string>
+             <string>Cijferoverzicht</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QFrame" name="paneel_mijncijfers_filters">
+           <widget class="QFrame" name="paneel_overzicht_filters">
             <property name="frameShape">
              <enum>QFrame::Shape::StyledPanel</enum>
             </property>
-            <layout class="QHBoxLayout" name="layout_mijncijfers_filters">
+            <layout class="QHBoxLayout" name="layout_overzicht_filters">
              <property name="spacing">
               <number>16</number>
              </property>
@@ -669,27 +679,37 @@ QHeaderView::section {
               <number>14</number>
              </property>
              <item>
-              <widget class="QLabel" name="lbl_mijncijfers_studiejaar">
+              <widget class="QLabel" name="lbl_overzicht_leerling">
+               <property name="text">
+                <string>Leerling:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="cmb_overzicht_leerling"/>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_overzicht_studiejaar">
                <property name="text">
                 <string>Studiejaar:</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="cmb_mijncijfers_studiejaar"/>
+              <widget class="QComboBox" name="cmb_overzicht_studiejaar"/>
              </item>
              <item>
-              <widget class="QLabel" name="lbl_mijncijfers_periode">
+              <widget class="QLabel" name="lbl_overzicht_periode">
                <property name="text">
                 <string>Periode:</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="cmb_mijncijfers_periode"/>
+              <widget class="QComboBox" name="cmb_overzicht_periode"/>
              </item>
              <item>
-              <spacer name="spacer_mijncijfers_filters_rechts">
+              <spacer name="spacer_overzicht_filters_rechts">
                <property name="orientation">
                 <enum>Qt::Orientation::Horizontal</enum>
                </property>
@@ -705,7 +725,195 @@ QHeaderView::section {
            </widget>
           </item>
           <item>
-           <widget class="QFrame" name="paneel_mijncijfers_cijfers">
+           <widget class="QFrame" name="container_leerling_kaarten">
+            <property name="frameShape">
+             <enum>QFrame::Shape::NoFrame</enum>
+            </property>
+            <layout class="QHBoxLayout" name="layout_leerling_kaarten">
+             <property name="spacing">
+              <number>16</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QFrame" name="kaart_leerling_gemiddelde">
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <layout class="QVBoxLayout" name="layout_kaart_leerling_gemiddelde">
+                <property name="leftMargin">
+                 <number>22</number>
+                </property>
+                <property name="topMargin">
+                 <number>18</number>
+                </property>
+                <property name="rightMargin">
+                 <number>22</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>18</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="lbl_leerling_gemiddelde_titel">
+                  <property name="styleSheet">
+                   <string notr="true">color: #6b7280; font-size: 13px;</string>
+                  </property>
+                  <property name="text">
+                   <string>Gemiddelde</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lbl_leerling_gemiddelde_waarde">
+                  <property name="styleSheet">
+                   <string notr="true">font-size: 26px; font-weight: bold;</string>
+                  </property>
+                  <property name="text">
+                   <string>-</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="kaart_leerling_aantal_cijfers">
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <layout class="QVBoxLayout" name="layout_kaart_leerling_aantal">
+                <property name="leftMargin">
+                 <number>22</number>
+                </property>
+                <property name="topMargin">
+                 <number>18</number>
+                </property>
+                <property name="rightMargin">
+                 <number>22</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>18</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="lbl_leerling_aantal_cijfers_titel">
+                  <property name="styleSheet">
+                   <string notr="true">color: #6b7280; font-size: 13px;</string>
+                  </property>
+                  <property name="text">
+                   <string>Aantal cijfers</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lbl_leerling_aantal_cijfers_waarde">
+                  <property name="styleSheet">
+                   <string notr="true">font-size: 26px; font-weight: bold;</string>
+                  </property>
+                  <property name="text">
+                   <string>-</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="kaart_leerling_laagste">
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <layout class="QVBoxLayout" name="layout_kaart_leerling_laagste">
+                <property name="leftMargin">
+                 <number>22</number>
+                </property>
+                <property name="topMargin">
+                 <number>18</number>
+                </property>
+                <property name="rightMargin">
+                 <number>22</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>18</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="lbl_leerling_laagste_titel">
+                  <property name="styleSheet">
+                   <string notr="true">color: #6b7280; font-size: 13px;</string>
+                  </property>
+                  <property name="text">
+                   <string>Laagste cijfer</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lbl_leerling_laagste_waarde">
+                  <property name="styleSheet">
+                   <string notr="true">font-size: 26px; font-weight: bold;</string>
+                  </property>
+                  <property name="text">
+                   <string>-</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="kaart_leerling_hoogste">
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <layout class="QVBoxLayout" name="layout_kaart_leerling_hoogste">
+                <property name="leftMargin">
+                 <number>22</number>
+                </property>
+                <property name="topMargin">
+                 <number>18</number>
+                </property>
+                <property name="rightMargin">
+                 <number>22</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>18</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="lbl_leerling_hoogste_titel">
+                  <property name="styleSheet">
+                   <string notr="true">color: #6b7280; font-size: 13px;</string>
+                  </property>
+                  <property name="text">
+                   <string>Hoogste cijfer</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lbl_leerling_hoogste_waarde">
+                  <property name="styleSheet">
+                   <string notr="true">font-size: 26px; font-weight: bold;</string>
+                  </property>
+                  <property name="text">
+                   <string>-</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="paneel_overzicht_cijfers">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -715,7 +923,7 @@ QHeaderView::section {
             <property name="frameShape">
              <enum>QFrame::Shape::StyledPanel</enum>
             </property>
-            <layout class="QVBoxLayout" name="layout_paneel_mijncijfers_cijfers">
+            <layout class="QVBoxLayout" name="layout_paneel_overzicht_cijfers">
              <property name="spacing">
               <number>12</number>
              </property>
@@ -732,48 +940,32 @@ QHeaderView::section {
               <number>20</number>
              </property>
              <item>
-              <widget class="QLabel" name="lbl_mijncijfers_cijfers_titel">
+              <widget class="QLabel" name="lbl_overzicht_cijfers_titel">
                <property name="styleSheet">
                 <string notr="true">font-size: 18px; font-weight: bold;</string>
                </property>
                <property name="text">
-                <string>Alle cijfers</string>
+                <string>Cijfers geselecteerde leerling</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="lbl_waarschuwing_po">
+              <widget class="QLabel" name="lbl_overzicht_melding">
                <property name="styleSheet">
                 <string notr="true">color: #b91c1c; font-size: 12px;</string>
                </property>
                <property name="text">
-                <string>Waarschuwing: PO-gemiddelde onvoldoende.</string>
+                <string/>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="lbl_waarschuwing_toets">
-               <property name="styleSheet">
-                <string notr="true">color: #b91c1c; font-size: 12px;</string>
-               </property>
-               <property name="text">
-                <string>Waarschuwing: Toets nog niet ingevoerd.</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QTableWidget" name="tabel_mijn_cijfers">
-               <property name="sizeAdjustPolicy">
-                <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents</enum>
-               </property>
-               <property name="horizontalScrollMode">
-                <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
-               </property>
+              <widget class="QTableWidget" name="tabel_overzicht_cijfers">
                <property name="rowCount">
                 <number>0</number>
                </property>
                <property name="columnCount">
-                <number>5</number>
+                <number>6</number>
                </property>
                <column>
                 <property name="text">
@@ -797,13 +989,167 @@ QHeaderView::section {
                </column>
                <column>
                 <property name="text">
-                 <string>Docent</string>
+                 <string>Studiejaar</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Periode</string>
                 </property>
                </column>
               </widget>
              </item>
             </layout>
            </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="pagina_cijfer_invoeren">
+         <layout class="QVBoxLayout" name="layout_cijfer_invoeren">
+          <property name="spacing">
+           <number>18</number>
+          </property>
+          <property name="leftMargin">
+           <number>30</number>
+          </property>
+          <property name="topMargin">
+           <number>25</number>
+          </property>
+          <property name="rightMargin">
+           <number>30</number>
+          </property>
+          <property name="bottomMargin">
+           <number>25</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lbl_cijfer_invoeren_titel">
+            <property name="styleSheet">
+             <string notr="true">font-size: 24px; font-weight: bold;</string>
+            </property>
+            <property name="text">
+             <string>Cijfer invoeren</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="paneel_invoer">
+            <property name="maximumSize">
+             <size>
+              <width>520</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <layout class="QFormLayout" name="form_invoer">
+             <property name="leftMargin">
+              <number>22</number>
+             </property>
+             <property name="topMargin">
+              <number>20</number>
+             </property>
+             <property name="rightMargin">
+              <number>22</number>
+             </property>
+             <property name="bottomMargin">
+              <number>20</number>
+             </property>
+             <property name="horizontalSpacing">
+              <number>18</number>
+             </property>
+             <property name="verticalSpacing">
+              <number>14</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QLabel" name="lbl_invoer_leerling">
+               <property name="text">
+                <string>Leerling:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="cmb_invoer_leerling"/>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="lbl_invoer_onderdeel">
+               <property name="text">
+                <string>Onderdeel:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="cmb_invoer_onderdeel"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="lbl_invoer_cijfer">
+               <property name="text">
+                <string>Cijfer:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QDoubleSpinBox" name="spin_invoer_cijfer">
+               <property name="decimals">
+                <number>1</number>
+               </property>
+               <property name="minimum">
+                <double>1.000000000000000</double>
+               </property>
+               <property name="maximum">
+                <double>10.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>0.100000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="lbl_invoer_datum">
+               <property name="text">
+                <string>Datum:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QDateEdit" name="date_invoer_datum">
+               <property name="calendarPopup">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QPushButton" name="btn_cijfer_opslaan">
+               <property name="text">
+                <string>Opslaan</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QLabel" name="lbl_invoer_melding">
+               <property name="styleSheet">
+                <string notr="true">color: #166534; font-size: 12px;</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="spacer_invoer_onder">
+            <property name="orientation">
+             <enum>Qt::Orientation::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>
@@ -836,13 +1182,16 @@ QHeaderView::section {
           </item>
           <item>
            <widget class="QFrame" name="paneel_account">
+            <property name="maximumSize">
+             <size>
+              <width>520</width>
+              <height>16777215</height>
+             </size>
+            </property>
             <property name="frameShape">
              <enum>QFrame::Shape::StyledPanel</enum>
             </property>
-            <layout class="QVBoxLayout" name="layout_paneel_account">
-             <property name="spacing">
-              <number>12</number>
-             </property>
+            <layout class="QFormLayout" name="form_account">
              <property name="leftMargin">
               <number>22</number>
              </property>
@@ -855,35 +1204,41 @@ QHeaderView::section {
              <property name="bottomMargin">
               <number>20</number>
              </property>
-             <item>
+             <property name="horizontalSpacing">
+              <number>18</number>
+             </property>
+             <property name="verticalSpacing">
+              <number>14</number>
+             </property>
+             <item row="0" column="0">
               <widget class="QLabel" name="lbl_account_gebruiker_label">
                <property name="text">
                 <string>Gebruikersnaam:</string>
                </property>
               </widget>
              </item>
-             <item>
+             <item row="0" column="1">
               <widget class="QLabel" name="lbl_account_gebruiker_waarde">
                <property name="text">
-                <string>leerling.voorbeeld</string>
+                <string>docent.voorbeeld</string>
                </property>
               </widget>
              </item>
-             <item>
+             <item row="1" column="0">
               <widget class="QLabel" name="lbl_account_email_label">
                <property name="text">
                 <string>E-mail:</string>
                </property>
               </widget>
              </item>
-             <item>
+             <item row="1" column="1">
               <widget class="QLabel" name="lbl_account_email_waarde">
                <property name="text">
-                <string>leerling@test.com</string>
+                <string>docent@test.com</string>
                </property>
               </widget>
              </item>
-             <item>
+             <item row="2" column="1">
               <widget class="QLabel" name="lbl_account_wachtwoord_titel">
                <property name="styleSheet">
                 <string notr="true">font-size: 16px; font-weight: bold; margin-top: 10px;</string>
@@ -893,128 +1248,80 @@ QHeaderView::section {
                </property>
               </widget>
              </item>
-             <item>
+             <item row="3" column="0">
               <widget class="QLabel" name="lbl_account_oud_wachtwoord_label">
                <property name="text">
                 <string>Oud wachtwoord:</string>
                </property>
               </widget>
              </item>
-             <item>
+             <item row="3" column="1">
               <widget class="QLineEdit" name="txt_oud_wachtwoord">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>34</height>
-                </size>
-               </property>
-               <property name="placeholderText">
-                <string>Vul je oude wachtwoord in</string>
-               </property>
                <property name="echoMode">
                 <enum>QLineEdit::EchoMode::Password</enum>
                </property>
-               <property name="readOnly">
-                <bool>false</bool>
-               </property>
               </widget>
              </item>
-             <item>
+             <item row="4" column="0">
               <widget class="QLabel" name="lbl_account_nieuw_wachtwoord_label">
                <property name="text">
                 <string>Nieuw wachtwoord:</string>
                </property>
               </widget>
              </item>
-             <item>
+             <item row="4" column="1">
               <widget class="QLineEdit" name="txt_nieuw_wachtwoord">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>34</height>
-                </size>
-               </property>
-               <property name="placeholderText">
-                <string>Vul je nieuwe wachtwoord in</string>
-               </property>
                <property name="echoMode">
                 <enum>QLineEdit::EchoMode::Password</enum>
                </property>
-               <property name="readOnly">
-                <bool>false</bool>
-               </property>
               </widget>
              </item>
-             <item>
+             <item row="5" column="0">
               <widget class="QLabel" name="lbl_account_nieuw_wachtwoord_herhaal_label">
                <property name="text">
-                <string>Herhaal nieuw wachtwoord:</string>
+                <string>Herhaal wachtwoord:</string>
                </property>
               </widget>
              </item>
-             <item>
+             <item row="5" column="1">
               <widget class="QLineEdit" name="txt_nieuw_wachtwoord_herhaal">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>34</height>
-                </size>
-               </property>
-               <property name="placeholderText">
-                <string>Herhaal je nieuwe wachtwoord</string>
-               </property>
                <property name="echoMode">
                 <enum>QLineEdit::EchoMode::Password</enum>
                </property>
-               <property name="readOnly">
-                <bool>false</bool>
-               </property>
               </widget>
              </item>
-             <item>
+             <item row="6" column="1">
               <widget class="QPushButton" name="btn_wachtwoord_wijzigen">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>38</height>
-                </size>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background-color: #111827; color: white; border-radius: 6px; padding: 8px; font-size: 14px;</string>
-               </property>
                <property name="text">
                 <string>Wachtwoord wijzigen</string>
                </property>
               </widget>
              </item>
-             <item>
+             <item row="7" column="1">
               <widget class="QLabel" name="lbl_wachtwoord_melding">
                <property name="styleSheet">
-                <string notr="true">color: #374151; font-size: 12px;</string>
+                <string notr="true">color: #166534; font-size: 12px;</string>
                </property>
                <property name="text">
                 <string/>
                </property>
-               <property name="wordWrap">
-                <bool>true</bool>
-               </property>
               </widget>
-             </item>
-             <item>
-              <spacer name="spacer_account_onder">
-               <property name="orientation">
-                <enum>Qt::Orientation::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
              </item>
             </layout>
            </widget>
+          </item>
+          <item>
+           <spacer name="spacer_account_onder">
+            <property name="orientation">
+             <enum>Qt::Orientation::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>

@@ -64,3 +64,51 @@ class CijferManager:
 
     def tel_po_onderdelen(self, cijfers):
         return len([c for c in cijfers if c.onderdeel.type == "PO"])
+    
+    # maakt van losse Cijfer objecten een overzicht per leerling
+    def get_docent_dashboard_overzicht(self, docent_id, klas, periode_obj):
+        studiejaar_obj = self.periode_service.studiejaar_repo.get_by_id(
+            periode_obj.studiejaar_id
+        )
+        studiejaar_str = studiejaar_obj.naam
+        periode_nummer = periode_obj.periode_nummer
+        cijfers = self.cijfer_repo.get_by_docent_klas_studiejaar_periode(
+            docent_id=docent_id,
+            klas=klas,
+            studiejaar_id=studiejaar_str,
+            periode_id=periode_nummer
+        )
+
+        overzicht = {}
+
+        for cijfer in cijfers:
+            leerling_id = cijfer.leerling.gebruiker_id
+
+            if leerling_id not in overzicht:
+                overzicht[leerling_id] = {
+                    "leerling": cijfer.leerling,
+                    "cijfers": []
+                }
+
+            overzicht[leerling_id]["cijfers"].append(cijfer)
+
+        resultaten = []
+
+        for data in overzicht.values():
+            leerling = data["leerling"]
+            leerling_cijfers = data["cijfers"]
+
+            po_gem = self.bereken_po_gemiddelde(leerling_cijfers)
+            toets = self.get_toets_cijfer(leerling_cijfers)
+            eind = self.bereken_eindcijfer(leerling_cijfers)
+            aantal = len(leerling_cijfers)
+
+            resultaten.append({
+                "leerling": leerling,
+                "po_gemiddelde": po_gem,
+                "toets": toets,
+                "eindcijfer": eind,
+                "aantal_cijfers": aantal
+            })
+
+        return resultaten

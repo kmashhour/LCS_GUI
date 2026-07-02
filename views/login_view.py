@@ -4,6 +4,7 @@ from PySide6.QtCore import QFile
 
 from services.authenticatie_service import AuthenticatieService
 from views.leerling.dashboard_leerling_view import DashboardLeerlingView
+from views.docent.dashboard_docent_view import DashboardDocentView
 
 
 class LoginView(QWidget):
@@ -46,6 +47,11 @@ class LoginView(QWidget):
 
         if rol == "leerling":
             self.dashboard = DashboardLeerlingView(gebruiker)
+            self.close()
+        elif rol == "docent":
+            self.dashboard = DashboardDocentView(gebruiker)
+            self.dashboard.show()
+            self.close()
         else:
             self.ui.lbl_error.setText(f"Onbekende rol: {rol}")
             return

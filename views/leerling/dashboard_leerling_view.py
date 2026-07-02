@@ -1,15 +1,16 @@
-from PySide6.QtWidgets import QWidget, QTableWidgetItem, QTableWidget
+from PySide6.QtWidgets import QWidget, QTableWidgetItem, QTableWidget, QMessageBox
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, Qt
 from datetime import datetime
-
 from services.cijfer_manager import CijferManager
-
+from services.authenticatie_service import AuthenticatieService
 
 class DashboardLeerlingView(QWidget):
     def __init__(self, gebruiker):
         super().__init__()
 
+        self.auth_service = AuthenticatieService()
+        
         # UI laden
         ui_file = QFile("ui/dashboard_leerling.ui")
         ui_file.open(QFile.ReadOnly)
@@ -33,6 +34,7 @@ class DashboardLeerlingView(QWidget):
             lambda: self.ui.stacked_paginas.setCurrentIndex(2)
         )
         self.ui.btn_uitloggen.clicked.connect(self.logout)
+        self.ui.btn_wachtwoord_wijzigen.clicked.connect(self.wijzig_wachtwoord)
 
         # paginas vullen
         self.vul_dashboard()
@@ -87,9 +89,9 @@ class DashboardLeerlingView(QWidget):
 
         # tabel vullen
         self.vul_dashboard_tabel(cijfers)
-        print("DEBUG leerling_id =", self.gebruiker.gebruiker_id)
-        print("DEBUG periode_id =", periode.periode_id if periode else None)
-        print("DEBUG aantal cijfers =", len(cijfers))
+        #print("DEBUG leerling_id =", self.gebruiker.gebruiker_id)
+        #print("DEBUG periode_id =", periode.periode_id if periode else None)
+        #print("DEBUG aantal cijfers =", len(cijfers))
 
     def vul_dashboard_tabel(self, cijfers):
         tabel = self.ui.tabel_dashboard_cijfers
@@ -199,6 +201,37 @@ class DashboardLeerlingView(QWidget):
     def vul_account(self):
         self.ui.lbl_account_gebruiker_waarde.setText(self.gebruiker.gebruikersnaam)
         self.ui.lbl_account_email_waarde.setText(self.gebruiker.email)
+
+    #wachtwoord wijzigen
+    def wijzig_wachtwoord(self):
+        oud = self.ui.txt_oud_wachtwoord.text().strip()
+        nieuw = self.ui.txt_nieuw_wachtwoord.text().strip()
+        herhaal = self.ui.txt_nieuw_wachtwoord_herhaal.text().strip()
+
+        if not oud or not nieuw or not herhaal:
+            self.ui.lbl_wachtwoord_melding.setText("Vul alle velden in.")
+            return
+
+        if nieuw != herhaal:
+            self.ui.lbl_wachtwoord_melding.setText("Nieuwe wachtwoorden zijn niet gelijk.")
+            return
+
+        if len(nieuw) < 7:
+            self.ui.lbl_wachtwoord_melding.setText("Nieuw wachtwoord moet minimaal 7 tekens zijn.")
+            return
+
+        succes, melding = self.auth_service.wijzig_wachtwoord(
+            gebruiker_id=self.gebruiker.gebruiker_id,
+            oud_wachtwoord=oud,
+            nieuw_wachtwoord=nieuw
+        )
+
+        self.ui.lbl_wachtwoord_melding.setText(melding)
+
+        if succes:
+            self.ui.txt_oud_wachtwoord.clear()
+            self.ui.txt_nieuw_wachtwoord.clear()
+            self.ui.txt_nieuw_wachtwoord_herhaal.clear()
 
     # afmelden
     def logout(self):

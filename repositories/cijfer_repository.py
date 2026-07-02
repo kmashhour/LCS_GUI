@@ -148,3 +148,23 @@ class CijferRepository:
         conn.close()
 
         return [self._build_cijfer(r) for r in rows]
+    
+    def get_by_docent_klas_studiejaar_periode(self, docent_id, klas, studiejaar_id, periode_id):
+        conn = self._connect()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            SELECT c.*
+            FROM Cijfer c
+            JOIN Leerling l ON c.leerling_id = l.leerling_id
+            WHERE c.docent_id = ?
+            AND l.klas = ?
+            AND c.studiejaar = ?
+            AND c.periode = ?
+            ORDER BY l.klas ASC, c.leerling_id ASC, c.datum ASC
+            """, (docent_id, klas, studiejaar_id, periode_id))
+
+        rows = cursor.fetchall()
+        conn.close()
+
+        return [self._build_cijfer(r) for r in rows]
