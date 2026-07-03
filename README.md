@@ -50,3 +50,5 @@ De database bevindt zich in:
 5. Applicatie starten
 Start de GUI via:
 python main.py
+
+standaard wachtwoord: test123

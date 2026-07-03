@@ -12,9 +12,10 @@ class CijferManager:
         self.cijfer_repo = cijfer_repo or CijferRepository()
         self.periode_service = periode_service or PeriodeService()
 
-    # afrond functie naar boven
-    def naar_boven_afronden(getal):
-        return float(Decimal(str(getal)).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP))
+    # afrond functie naar boven overbodig hier staat twee keer in.
+    #def naar_boven_afronden(getal):
+        #return float(Decimal(str(getal)).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP))
+        
     # dashboard functies
     def get_huidig_studiejaar(self, leerling_id):
         vandaag = date.today().isoformat()
