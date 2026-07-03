@@ -1,5 +1,6 @@
 from datetime import date
 from repositories.cijfer_repository import CijferRepository
+from modellen.cijfer import Cijfer
 from services.periode_service import PeriodeService
 from decimal import Decimal, ROUND_HALF_UP
 # hulpfunctie afronden naar boven
@@ -112,3 +113,21 @@ class CijferManager:
             })
 
         return resultaten
+    
+    def get_laatste_klas_van_docent(self, docent_id):
+        return self.cijfer_repo.get_laatste_klas_van_docent(docent_id)
+    
+    def sla_cijfer_op(self, leerling, onderdeel, docent, waarde, datum, studiejaar, periode):
+        cijfer = Cijfer(
+            cijfer_id=None,
+            leerling=leerling,
+            onderdeel=onderdeel,
+            docent=docent,
+            waarde=waarde,
+            datum=datum
+        )
+
+        cijfer.studiejaar = studiejaar
+        cijfer.periode = periode
+
+        return self.cijfer_repo.insert(cijfer)

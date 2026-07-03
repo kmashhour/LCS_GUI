@@ -63,8 +63,8 @@ class CijferRepository:
             cijfer.docent.gebruiker_id,
             cijfer.waarde,
             cijfer.datum,
-            cijfer.studiejaar.studiejaar_id,
-            cijfer.periode.periode_id
+            cijfer.studiejaar.naam,
+            cijfer.periode.periode_nummer
         ))
 
         conn.commit()
@@ -168,3 +168,40 @@ class CijferRepository:
         conn.close()
 
         return [self._build_cijfer(r) for r in rows]
+    
+    def get_laatste_klas_van_docent(self, docent_id):
+        conn = self._connect()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            SELECT l.klas
+            FROM Cijfer c
+            JOIN Leerling l ON c.leerling_id = l.leerling_id
+            WHERE c.docent_id = ?
+            ORDER BY c.datum DESC
+            LIMIT 1
+        """, (docent_id,))
+
+        row = cursor.fetchone()
+        conn.close()
+
+        return row["klas"] if row else None
+    
+    def bestaat_cijfer(self, leerling_id, onderdeel_id, studiejaar, periode):
+        conn = self._connect()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            SELECT cijfer_id
+            FROM Cijfer
+            WHERE leerling_id = ?
+            AND onderdeel_id = ?
+            AND studiejaar = ?
+            AND periode = ?
+            LIMIT 1
+        """, (leerling_id, onderdeel_id, studiejaar, periode))
+
+        row = cursor.fetchone()
+        conn.close()
+
+        return row is not None

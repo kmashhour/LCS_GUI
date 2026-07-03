@@ -199,7 +199,6 @@ QHeaderView::section {
 }
 QLineEdit,
 QComboBox,
-QDoubleSpinBox,
 QDateEdit {
     background-color: white;
     border: 1px solid #d1d5db;
@@ -208,7 +207,7 @@ QDateEdit {
 }
 QPushButton#btn_cijfer_opslaan,
 QPushButton#btn_wachtwoord_wijzigen {
-    background-color: #2563eb;
+    background-color: #111827;
     color: white;
     padding: 9px;
     border: none;
@@ -216,7 +215,7 @@ QPushButton#btn_wachtwoord_wijzigen {
 }
 QPushButton#btn_cijfer_opslaan:hover,
 QPushButton#btn_wachtwoord_wijzigen:hover {
-    background-color: #1d4ed8;
+    background-color: #1f2937;
 }
       </string>
      </property>
@@ -242,7 +241,7 @@ QPushButton#btn_wachtwoord_wijzigen:hover {
       <item>
        <widget class="QStackedWidget" name="stacked_paginas">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="pagina_dashboard">
          <layout class="QVBoxLayout" name="layout_dashboard">
@@ -679,16 +678,6 @@ QPushButton#btn_wachtwoord_wijzigen:hover {
               <number>14</number>
              </property>
              <item>
-              <widget class="QLabel" name="lbl_overzicht_leerling">
-               <property name="text">
-                <string>Leerling:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QComboBox" name="cmb_overzicht_leerling"/>
-             </item>
-             <item>
               <widget class="QLabel" name="lbl_overzicht_studiejaar">
                <property name="text">
                 <string>Studiejaar:</string>
@@ -707,6 +696,26 @@ QPushButton#btn_wachtwoord_wijzigen:hover {
              </item>
              <item>
               <widget class="QComboBox" name="cmb_overzicht_periode"/>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_overzicht_klas">
+               <property name="text">
+                <string>Klas:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="cmb_overzicht_klas"/>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_overzicht_leerling">
+               <property name="text">
+                <string>Leerling:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="cmb_overzicht_leerling"/>
              </item>
              <item>
               <spacer name="spacer_overzicht_filters_rechts">
@@ -769,7 +778,7 @@ QPushButton#btn_wachtwoord_wijzigen:hover {
                    <string notr="true">color: #6b7280; font-size: 13px;</string>
                   </property>
                   <property name="text">
-                   <string>Gemiddelde</string>
+                   <string>PO-gemiddelde</string>
                   </property>
                  </widget>
                 </item>
@@ -810,7 +819,7 @@ QPushButton#btn_wachtwoord_wijzigen:hover {
                    <string notr="true">color: #6b7280; font-size: 13px;</string>
                   </property>
                   <property name="text">
-                   <string>Aantal cijfers</string>
+                   <string>Eindcijfer</string>
                   </property>
                  </widget>
                 </item>
@@ -1043,6 +1052,12 @@ QPushButton#btn_wachtwoord_wijzigen:hover {
              <enum>QFrame::Shape::StyledPanel</enum>
             </property>
             <layout class="QFormLayout" name="form_invoer">
+             <property name="horizontalSpacing">
+              <number>18</number>
+             </property>
+             <property name="verticalSpacing">
+              <number>14</number>
+             </property>
              <property name="leftMargin">
               <number>22</number>
              </property>
@@ -1055,77 +1070,95 @@ QPushButton#btn_wachtwoord_wijzigen:hover {
              <property name="bottomMargin">
               <number>20</number>
              </property>
-             <property name="horizontalSpacing">
-              <number>18</number>
-             </property>
-             <property name="verticalSpacing">
-              <number>14</number>
-             </property>
              <item row="0" column="0">
+              <widget class="QLabel" name="lbl_invoer_studiejaar">
+               <property name="text">
+                <string>Studiejaar:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="cmb_invoer_studiejaar"/>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="lbl_invoer_periode">
+               <property name="text">
+                <string>Periode:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="cmb_invoer_periode"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="lbl_invoer_klas">
+               <property name="text">
+                <string>Klas:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QComboBox" name="cmb_invoer_klas"/>
+             </item>
+             <item row="3" column="0">
               <widget class="QLabel" name="lbl_invoer_leerling">
                <property name="text">
                 <string>Leerling:</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
+             <item row="3" column="1">
               <widget class="QComboBox" name="cmb_invoer_leerling"/>
              </item>
-             <item row="1" column="0">
+             <item row="4" column="0">
               <widget class="QLabel" name="lbl_invoer_onderdeel">
                <property name="text">
                 <string>Onderdeel:</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
+             <item row="4" column="1">
               <widget class="QComboBox" name="cmb_invoer_onderdeel"/>
              </item>
-             <item row="2" column="0">
+             <item row="5" column="0">
               <widget class="QLabel" name="lbl_invoer_cijfer">
                <property name="text">
                 <string>Cijfer:</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
-              <widget class="QDoubleSpinBox" name="spin_invoer_cijfer">
-               <property name="decimals">
-                <number>1</number>
-               </property>
-               <property name="minimum">
-                <double>1.000000000000000</double>
-               </property>
-               <property name="maximum">
-                <double>10.000000000000000</double>
-               </property>
-               <property name="singleStep">
-                <double>0.100000000000000</double>
+             <item row="5" column="1">
+              <widget class="QLineEdit" name="txt_invoer_cijfer">
+               <property name="placeholderText">
+                <string>Bijv. 6,1</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
+             <item row="6" column="0">
               <widget class="QLabel" name="lbl_invoer_datum">
                <property name="text">
                 <string>Datum:</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
+             <item row="6" column="1">
               <widget class="QDateEdit" name="date_invoer_datum">
+               <property name="displayFormat">
+                <string>dd-MM-yyyy</string>
+               </property>
                <property name="calendarPopup">
                 <bool>true</bool>
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
+             <item row="7" column="1">
               <widget class="QPushButton" name="btn_cijfer_opslaan">
                <property name="text">
                 <string>Opslaan</string>
                </property>
               </widget>
              </item>
-             <item row="5" column="1">
+             <item row="8" column="1">
               <widget class="QLabel" name="lbl_invoer_melding">
                <property name="styleSheet">
                 <string notr="true">color: #166534; font-size: 12px;</string>
@@ -1192,6 +1225,12 @@ QPushButton#btn_wachtwoord_wijzigen:hover {
              <enum>QFrame::Shape::StyledPanel</enum>
             </property>
             <layout class="QFormLayout" name="form_account">
+             <property name="horizontalSpacing">
+              <number>18</number>
+             </property>
+             <property name="verticalSpacing">
+              <number>14</number>
+             </property>
              <property name="leftMargin">
               <number>22</number>
              </property>
@@ -1203,12 +1242,6 @@ QPushButton#btn_wachtwoord_wijzigen:hover {
              </property>
              <property name="bottomMargin">
               <number>20</number>
-             </property>
-             <property name="horizontalSpacing">
-              <number>18</number>
-             </property>
-             <property name="verticalSpacing">
-              <number>14</number>
              </property>
              <item row="0" column="0">
               <widget class="QLabel" name="lbl_account_gebruiker_label">
